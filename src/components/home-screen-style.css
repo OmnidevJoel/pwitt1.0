@@ -1,0 +1,17 @@
+.home-screen-form {
+    display: 'flex';
+    size: 100%;
+}
+
+
+
+
+
+
+
+.home-screen-title {
+right: 50;
+left: 50;
+position: relative;
+    color:aqua
+}

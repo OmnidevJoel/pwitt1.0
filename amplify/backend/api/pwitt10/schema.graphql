@@ -1,0 +1,56 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
+
+type Travelers @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  display_name: String
+  status: Boolean
+  installation_location: String
+  projectsID: ID! @index(name: "byProjects")
+}
+
+type Projects @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  display_nam: String
+  status: Boolean
+  location: String
+  TimeSheetEntrys: [TimeSheetEntrys] @hasMany(indexName: "byProjects", fields: ["id"])
+  Travelers: [Travelers] @hasMany(indexName: "byProjects", fields: ["id"])
+}
+
+type TimeSheetEntrys @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  allocated_hours: String
+  untitledfield: String
+  timesheetID: ID! @index(name: "byTimeSheet")
+  projectsID: ID! @index(name: "byProjects")
+}
+
+type TimeSheet @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  clock_in: AWSTimestamp
+  lunch_out: AWSTimestamp
+  lunch_in: AWSTimestamp
+  clock_out: AWSTimestamp
+  date: AWSDate
+  total_hours: String
+  employeeID: ID! @index(name: "byEmployee")
+  TimeSheetEntrys: [TimeSheetEntrys] @hasMany(indexName: "byTimeSheet", fields: ["id"])
+}
+
+type Employee @model @auth(rules: [{allow: public}])
+
+
+
+ {
+  id: ID!
+  first_name: String
+  last_name: String
+  supervisor: String
+  status: Boolean
+  normal_start_time: AWSTime
+  email: AWSEmail
+  employee_timesheet: [TimeSheet] @hasMany(indexName: "byEmployee", fields: ["id"])
+}
+
