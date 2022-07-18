@@ -53,4 +53,3 @@ type Employee @model @auth(rules: [{allow: public}])
   email: AWSEmail
   employee_timesheet: [TimeSheet] @hasMany(indexName: "byEmployee", fields: ["id"])
 }
-
