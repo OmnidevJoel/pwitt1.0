@@ -7,6 +7,8 @@ import awsconfig from './aws-exports'
 import { useState, useEffect } from 'react';
 //import EmpQuery from './components/EmpQuery';
 import {BasicTable} from './components/BasicTable'
+import {Otter} from './components/Otter'
+
 Amplify.configure(awsconfig);
 
 
@@ -23,7 +25,7 @@ function App() {
   
   return (
 //<Home/>
-<div><BasicTable/></div> 
+<div><Otter/></div> 
 
 
 
